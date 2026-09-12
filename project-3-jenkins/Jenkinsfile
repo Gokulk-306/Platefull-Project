@@ -13,6 +13,17 @@ pipeline {
       steps { checkout scm }
     }
 
+    stage('Connect to Minikube') {
+      steps {
+        sh '''
+          mkdir -p /var/jenkins_home/.kube
+          cp /home/gokul/.kube/config "$KUBECONFIG"
+          kubectl config set-cluster minikube --server=https://minikube:8443
+          kubectl cluster-info
+        '''
+      }
+    }
+
     stage('Install dependencies') {
       steps {
         dir("${APP_DIRECTORY}") {

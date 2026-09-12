@@ -13,7 +13,17 @@ services:
       - ${HOME}/.kube:/home/gokul/.kube:ro
       - ${HOME}/.minikube:/home/gokul/.minikube:ro
     environment:
-      KUBECONFIG: /home/gokul/.kube/config
+      HOME: /home/gokul
+      MINIKUBE_HOME: /home/gokul/.minikube
+      KUBECONFIG: /var/jenkins_home/.kube/config
+    networks:
+      - default
+      - minikube
 
 volumes:
   jenkins_home:
+
+networks:
+  minikube:
+    external: true
+    name: minikube

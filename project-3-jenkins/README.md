@@ -23,7 +23,7 @@ minikube status
 kubectl get nodes
 ```
 
-The Jenkins container uses your Docker socket and read-only Kubernetes / Minikube configuration. The compose file assumes your WSL username is `gokul`; if `echo $HOME` is not `/home/gokul`, change `/home/gokul` in `docker-compose.yml` to your WSL home path.
+The Jenkins container uses your Docker socket and read-only Kubernetes / Minikube configuration. It also joins Minikube's Docker network, allowing the pipeline to reach the Kubernetes API at `minikube:8443`. The compose file assumes your WSL username is `gokul`; if `echo $HOME` is not `/home/gokul`, change `/home/gokul` in `docker-compose.yml` to your WSL home path.
 
 ## 2. Start Jenkins
 
