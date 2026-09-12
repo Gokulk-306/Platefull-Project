@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plateful — food, delivered joyfully</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="brand" href="#"><span>✦</span> plateful</a>
+      <button class="location" aria-label="Change location"><b>Deliver to</b><span>Home, Indiranagar</span><i>⌄</i></button>
+      <nav><a href="#restaurants">Restaurants</a><a href="#offers">Offers</a><button class="cart" id="cartButton">Bag <span id="cartCount">0</span></button></nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">YOUR NEXT CRAVING IS WAITING</p>
+          <h1>Fresh food.<br /><em>Fast delivery.</em></h1>
+          <p class="hero-text">From neighborhood favorites to new little obsessions, we bring the city’s best bites to your door.</p>
+          <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search restaurants, cuisines, or dishes" /></label>
+          <div class="trust"><span>⚡ 35 min average delivery</span><span>★ 4.8 app rating</span></div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="sun"></div><div class="plate">🥘</div><div class="floating floating-one">🍋</div><div class="floating floating-two">🌶️</div><div class="sticker">hot<br />& fresh</div>
+        </div>
+      </section>
+
+      <section class="categories" aria-label="Food categories">
+        <button class="category active" data-category="All"><span>✨</span>All</button>
+        <button class="category" data-category="Indian"><span>🍛</span>Indian</button>
+        <button class="category" data-category="Pizza"><span>🍕</span>Pizza</button>
+        <button class="category" data-category="Healthy"><span>🥗</span>Healthy</button>
+        <button class="category" data-category="Chinese"><span>🍜</span>Chinese</button>
+        <button class="category" data-category="Burgers"><span>🍔</span>Burgers</button>
+        <button class="category" data-category="South Indian"><span>🥞</span>South Indian</button>
+      </section>
+
+      <section class="offer-banner" id="offers"><div><span class="offer-icon">✦</span><p>WEEKEND FEAST</p><h2>Up to 60% off <small>on your first 3 orders</small></h2></div><button>Explore offers <span>→</span></button></section>
+
+      <section class="restaurants" id="restaurants">
+        <div class="section-head"><div><p class="eyebrow">HANDPICKED FOR YOU</p><h2>Top picks near you</h2></div><span id="resultCount"></span></div>
+        <div class="restaurant-grid" id="restaurantGrid"></div>
+      </section>
+    </main>
+
+    <aside class="cart-panel" id="cartPanel" aria-label="Shopping bag"><button class="close" id="closeCart">×</button><p class="eyebrow">YOUR ORDER</p><h2>Your bag</h2><div id="cartItems" class="cart-items"><p class="empty">Your bag is waiting for something delicious.</p></div><div class="cart-total"><span>Total</span><b id="total">₹0</b></div><button class="checkout">Checkout <span>→</span></button></aside>
+    <div class="overlay" id="overlay"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

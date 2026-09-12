@@ -1,0 +1,14 @@
+{
+  "name": "plateful-food-delivery",
+  "version": "1.0.0",
+  "description": "A Dockerized Node.js food delivery demo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

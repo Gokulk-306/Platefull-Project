@@ -1,0 +1,66 @@
+pipeline {
+  agent any
+
+  environment {
+    APP_DIRECTORY = 'project-1-docker'
+    K8S_DIRECTORY = 'project-2-kubernetes'
+    IMAGE_NAME = 'my-devops-app'
+    IMAGE_TAG = "${BUILD_NUMBER}"
+  }
+
+  stages {
+    stage('Checkout') {
+      steps { checkout scm }
+    }
+
+    stage('Install dependencies') {
+      steps {
+        dir("${APP_DIRECTORY}") {
+          sh 'npm install --ignore-scripts'
+        }
+      }
+    }
+
+    stage('Test') {
+      steps {
+        dir("${APP_DIRECTORY}") {
+          sh 'npm test'
+        }
+      }
+    }
+
+    stage('Build Docker image') {
+      steps {
+        sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG $APP_DIRECTORY'
+      }
+    }
+
+    stage('Load image into Minikube') {
+      steps {
+        sh 'minikube image load $IMAGE_NAME:$IMAGE_TAG'
+      }
+    }
+
+    stage('Deploy to Kubernetes') {
+      steps {
+        sh '''
+          kubectl apply -f $K8S_DIRECTORY/service.yaml
+          kubectl get deployment plateful >/dev/null 2>&1 || kubectl apply -f $K8S_DIRECTORY/deployment.yaml
+          kubectl set image deployment/plateful plateful=$IMAGE_NAME:$IMAGE_TAG
+          kubectl annotate deployment/plateful kubernetes.io/change-cause="Jenkins build #$BUILD_NUMBER" --overwrite
+          kubectl rollout status deployment/plateful --timeout=120s
+        '''
+      }
+    }
+  }
+
+  post {
+    success {
+      echo "Deployment complete: $IMAGE_NAME:$IMAGE_TAG"
+    }
+    failure {
+      sh 'kubectl get pods -l app=plateful || true'
+      sh 'kubectl logs -l app=plateful --tail=50 --prefix || true'
+    }
+  }
+}
