@@ -48,7 +48,7 @@ pipeline {
 
     stage('Load image into Minikube') {
       steps {
-        sh 'docker save $IMAGE_NAME:$IMAGE_TAG | minikube ssh -- docker load'
+        sh 'docker save $IMAGE_NAME:$IMAGE_TAG | docker exec -i minikube docker load'
       }
     }
 

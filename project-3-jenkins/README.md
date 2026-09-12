@@ -93,7 +93,7 @@ Select **Build Now** in Jenkins for now. Later, configure a GitHub webhook to tr
 | Install dependencies | Installs Node.js dependencies. |
 | Test | Tests the health and restaurant API endpoints. |
 | Build Docker image | Creates a uniquely tagged image using `BUILD_NUMBER`. |
-| Load image into Minikube | Streams the built Docker image directly into the local cluster, without requiring a registry. |
+| Load image into Minikube | Streams the built Docker image into the Minikube node through Docker, without requiring a registry. |
 | Deploy to Kubernetes | Updates the Deployment and waits for a successful rolling update. |
 
 ## Troubleshooting
